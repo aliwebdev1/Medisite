@@ -10,7 +10,7 @@ function App() {
           className="btn"
           onClick={() => document.getElementById("my_modal_1").showModal()}
         >
-          open modal
+          Open modal this section is made by Ali
         </button>
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box">
