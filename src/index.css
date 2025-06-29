@@ -6,7 +6,16 @@ body{
   font-family: "Roboto", sans-serif;
 }
 
+.shape{
+ clip-path: polygon(0 24%, 100% 0, 100% 100%, 0 100%);
+}
 
+@media only screen and (max-width:500px) {
+  .shape{
+clip-path: polygon(0 9%, 100% 0, 100% 100%, 0 100%);
+}
+  
+}
 
 :root {
   --color-primary: #34C9B6;
