@@ -1,41 +1,8 @@
-# Medisite
+# React + Vite
 
-This Medisite project made by eshikhon MERN F24-1 students and teacher both, we are using react, router and many for in the project ..........
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- [Medisite live website link]()
+Currently, two official plugins are available:
 
-## Fully Dynamic website
-
-## User management
-
-## Routing
-
-## Private Route
-
-## Admin Route
-
-## Admin panel
-
-## Dashboard
-
-## User and Admin use Same dashboard base on role
-
-## Content Management
-
-## Special service add
-
-## Booking system
-
-## Booking limitation per user and data
-
-## Date function
-
-## Conditional Render
-
-## React Tanstack Query
-
-## React Hook From
-
-## From validation
-
-## Payment system
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
