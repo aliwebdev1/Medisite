@@ -1,33 +1,39 @@
 import React from "react";
 import logo from "../../../assets/images/Medisite logo.png";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const menuItems = (
     <>
-      <li className="text-white text-[20px]">
-        <a>Home</a>
-      </li>
-      <li className="text-white text-[20px]">
-        <a>Pages</a>
-      </li>
-      <li className="text-white text-[20px]">
-        <a>Service Area</a>
-      </li>
-      <li className="text-white text-[20px]">
-        <a>Blogs</a>
-      </li>
-      <li className="text-white text-[20px]">
-        <a>Contact Us</a>
-      </li>
-      <li className="text-white text-[20px]">
-        <a>About Us</a>
-      </li>
+      {[
+        { to: "/home", label: "Home" },
+        { to: "/pages", label: "Pages" },
+        { to: "/service", label: "Service Area" },
+        { to: "/blogs", label: "Blogs" },
+        { to: "/contact", label: "Contact Us" },
+        { to: "/about", label: "About Us" },
+      ].map((item) => (
+        <li key={item.to} className="text-[20px]">
+          <NavLink
+            to={item.to}
+            className={({ isActive }) =>
+              `pb-1 px-2 transition-all duration-300 ${
+                isActive
+                  ? " font-semibold border-b-4 border-white"
+                  : "text-white hover:text-[#34c9b6]"
+              }`
+            }
+          >
+            {item.label}
+          </NavLink>
+        </li>
+      ))}
     </>
   );
 
   return (
     <header>
-      <div className="navbar bg-primary shadow-sm px-4 md:px-29">
+      <div className="navbar bg-primary shadow-sm px-4 md:px-29 fixed top-0 z-50">
         <div className="navbar-start">
           <div className="dropdown ">
             <div
@@ -59,9 +65,12 @@ const Header = () => {
               {menuItems}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl p-0 flex items-center">
+          <NavLink
+            to="/"
+            className="btn btn-ghost text-xl p-0 flex items-center"
+          >
             <img className="w-20 md:w-auto" src={logo} alt="medisite" />
-          </a>
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>

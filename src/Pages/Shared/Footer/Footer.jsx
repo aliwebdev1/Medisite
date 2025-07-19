@@ -55,15 +55,15 @@ const Footer = () => {
           </a>
         </nav>
 
-        <div className="w-1/4 flex justify-end">
+        <div className="w-1/4 flex justify-end m-3 md:m-0">
           <nav>
             <h6 className="footer-title">Follow us On</h6>
             <div className="flex gap-5">
-              <div className="w-12 h-12 flex justify-center items-center bg-white rounded-full">
+              <div className="w-8 h-8 md:w-12 md:h-12 flex justify-center items-center bg-white rounded-full">
                 <img className="" src={google} alt="" />
               </div>
-              <div className="w-12 h-12 bg-white rounded-full flex justify-center items-center">
-                <img src={facebook} alt="" />
+              <div className="w-8 h-8 md:w-12 md:h-12 bg-white rounded-full flex justify-center items-center">
+                <img className="" src={facebook} alt="" />
               </div>
             </div>
           </nav>

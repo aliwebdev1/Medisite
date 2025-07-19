@@ -1,9 +1,13 @@
 import React from "react";
+import MakeAppointment from "../Home/MakeAppointment/MakeAppointment";
 
 const Contact = () => {
   return (
     <div>
-      <h1>Contact page</h1>
+      <MakeAppointment
+        title="Contact Us Now"
+        button="Contact Now"
+      ></MakeAppointment>
     </div>
   );
 };
