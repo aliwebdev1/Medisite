@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../assets/images/Medisite logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../context/UserContext";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const menuItems = (
     <>
       {[
@@ -76,8 +87,17 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {user ? (
+            <button onClick={handleLogOut} className="btn">
+              Sign Out
+            </button>
+          ) : (
+            <Link to="/sign-up" className="btn">
+              Sign - up
+            </Link>
+          )}
         </div>
+        {user?.displayName}
       </div>
     </header>
   );

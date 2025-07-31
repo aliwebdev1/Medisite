@@ -1,7 +1,8 @@
 import React from "react";
 
-const AppointmentOptions = ({ service }) => {
+const AppointmentOptions = ({ service, setOption }) => {
   const { name, slots } = service;
+
   return (
     <div className="card shadow-2xl text-center hover:bg-[#C7F2FF]">
       <div className="card-body">
@@ -12,7 +13,13 @@ const AppointmentOptions = ({ service }) => {
           Available {slots.length > 1 ? "Slots" : "Slot"} {slots.length}
         </h3>
         <p>{slots[0]}</p>
-        <button className="btn btn-primary mt-3">Select your Date</button>
+        <label
+          onClick={() => setOption(service)}
+          htmlFor="booking_modal"
+          className="btn btn-primary mt-3"
+        >
+          Select your Date
+        </label>
       </div>
     </div>
   );

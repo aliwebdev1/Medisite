@@ -6,7 +6,9 @@ import NotFound from "../Pages/NotFound/NotFound";
 import Contact from "../Pages/Contact/Contact";
 import BlogPage from "../Pages/Home/BlogPage/BlogPage";
 import Services from "../Pages/Services/Services";
-
+import SignUp from "../Pages/SignUp/SignUp";
+import SignIn from "../Pages/SignIn/SignIn";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,7 +36,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <BlogPage></BlogPage>,
+        element: (
+          <PrivateRoute>
+            <BlogPage></BlogPage>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/sign-in",
+        element: <SignIn />,
       },
     ],
   },

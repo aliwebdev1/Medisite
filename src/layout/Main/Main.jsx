@@ -7,7 +7,7 @@ const Main = () => {
   return (
     <div>
       <Header></Header>
-      <div className="mt-0 md:mt-19">
+      <div className="mt-0 md:mt-18">
         <Outlet></Outlet>
       </div>
       <Footer></Footer>
