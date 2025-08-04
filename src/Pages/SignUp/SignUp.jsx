@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Eye icons
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -27,37 +28,45 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         // save to database and update
-        updateUser(data.name)
-          .then(() => {
-            const userObject = {
-              name: data.name,
-              email: data.email,
-            };
-            savedUser(userObject);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        toast.success("Successfully Create an Account");
-        reset();
+        const useInfo={
+          displayName:data.name
+        }
+        updateUser(useInfo)
+        .then(()=>{
+          navigate('/')
+        })
+        .catch((error)=>console.log(error))
+        savedUser(data.name,data.email)
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(error=>{
+        if(error.message =="Firebase: Error (auth/email-already-in-use)."){
+          toast.error("Email Already exist")
+        }
+        
+      })
+      // reset()
   };
 
-  const savedUser = (userInfo) => {
-    fetch("api", {
+  const savedUser = (name, email) => {
+    const user = { name, email };
+    console.log(user);
+    
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(userInfo),
+      body: JSON.stringify(user),
     }).then((res) =>
-      res.json().then((data) => {
-        console.log(data);
-      })
+      res
+        .json()
+        .then((data) => {
+          toast.success("Successfully Create an Account");
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     );
   };
 

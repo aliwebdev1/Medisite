@@ -35,13 +35,8 @@ const UserContext = ({ children }) => {
   };
 
   // update
-  const updateUser = (name) => {
-    setUserLoading(true);
-    updateProfile(auth.currentUser, {
-      displayName: name,
-    })
-      .then(() => {})
-      .catch((error) => {});
+  const updateUser = (userInfo) => {
+   return updateProfile(auth.currentUser,userInfo)
   };
 
   // tracking
