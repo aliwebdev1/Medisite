@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,46 +28,42 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         // save to database and update
-        const useInfo={
-          displayName:data.name
-        }
+        const useInfo = {
+          displayName: data.name,
+        };
         updateUser(useInfo)
-        .then(()=>{
-          navigate('/')
-        })
-        .catch((error)=>console.log(error))
-        savedUser(data.name,data.email)
+          .then(() => {
+            navigate("/");
+          })
+          .catch((error) => console.log(error));
+        // save to database
+        savedUser(data.name, data.email);
       })
-      .catch(error=>{
-        if(error.message =="Firebase: Error (auth/email-already-in-use)."){
-          toast.error("Email Already exist")
+      .catch((error) => {
+        if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+          toast.error("Email Already exist");
         }
-        
-      })
-      // reset()
+      });
+    // reset()
   };
 
   const savedUser = (name, email) => {
     const user = { name, email };
     console.log(user);
-    
+
     fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(user),
-    }).then((res) =>
-      res
-        .json()
-        .then((data) => {
-          toast.success("Successfully Create an Account");
-          
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-    );
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Account has been created");
+        }
+      });
   };
 
   return (

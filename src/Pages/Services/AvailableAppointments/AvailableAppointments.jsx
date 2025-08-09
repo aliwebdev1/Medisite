@@ -5,6 +5,8 @@ import { format } from "date-fns/format";
 
 const AvailableAppointments = ({ selectedDate }) => {
   const date = format(selectedDate, "PP");
+  console.log(date);
+
   const [option, setOption] = useState({});
   const [services, setServices] = useState();
 

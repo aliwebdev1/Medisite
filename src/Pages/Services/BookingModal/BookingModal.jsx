@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../context/UserContext";
+import toast from "react-hot-toast";
 
 const BookingModal = ({ option, setOption, date }) => {
+  console.log(date);
+
   const { name, slots } = option;
+  const { user } = useContext(AuthContext);
 
   const handleBooking = (event) => {
     event.preventDefault();
@@ -19,10 +24,28 @@ const BookingModal = ({ option, setOption, date }) => {
       email: email,
       number: number,
     };
-    console.log(booking);
+    // console.log(booking);
     // post in database
+    fetch("http://localhost:3000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
 
-    // setOption(null);
+        if (data.acknowledged) {
+          toast.success("Booking Confirmed");
+        }
+        if (data.message) {
+          toast.error(data.message);
+        }
+      });
+
+    setOption(null);
   };
 
   return (
@@ -52,14 +75,14 @@ const BookingModal = ({ option, setOption, date }) => {
             <input
               type="text"
               placeholder="Date"
-              defaultValue={date}
-              readOnly
+              value={date}
               className="input w-full my-3"
             />
 
             <input
               name="name"
               type="text"
+              defaultValue={user?.displayName}
               placeholder="Name here"
               className="input w-full my-3"
             />
@@ -67,6 +90,7 @@ const BookingModal = ({ option, setOption, date }) => {
             <input
               name="email"
               type="email"
+              defaultValue={user?.email}
               placeholder="email here"
               className="input w-full my-3"
             />

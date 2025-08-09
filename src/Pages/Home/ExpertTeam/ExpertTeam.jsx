@@ -14,17 +14,17 @@ const ExpertTeam = () => {
     },
     {
       img: doctor4,
-      name: "2Patrik Cortez",
+      name: "2Patrik Cortezi",
       designation: "Doctor",
     },
     {
       img: doctor2,
-      name: "2Patrik Cortez",
+      name: "2Patrik Corteza",
       designation: "Doctor",
     },
     {
       img: doctor3,
-      name: "2Patrik Cortez",
+      name: "2Patrik Corte",
       designation: "Doctor",
     },
   ];
