@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import toast from "react-hot-toast";
 
-const BookingModal = ({ option, setOption, date }) => {
+const BookingModal = ({ option, setOption, date ,refetch}) => {
   console.log(date);
 
   const { name, slots } = option;
@@ -39,6 +39,7 @@ const BookingModal = ({ option, setOption, date }) => {
 
         if (data.acknowledged) {
           toast.success("Booking Confirmed");
+          refetch()
         }
         if (data.message) {
           toast.error(data.message);
