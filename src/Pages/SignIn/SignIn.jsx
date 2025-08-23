@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google.png";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -14,6 +14,7 @@ const SignIn = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,6 +31,7 @@ const SignIn = () => {
         console.log(user);
         toast.success("Login Successful");
         reset();
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);

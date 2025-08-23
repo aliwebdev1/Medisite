@@ -4,30 +4,49 @@ import doctor2 from "../../../assets/images/pic2.png";
 import doctor3 from "../../../assets/images/pic3.png";
 import doctor4 from "../../../assets/images/pic4.png";
 import Expert from "./Expert";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Shared/Loading/Loading";
 
 const ExpertTeam = () => {
-  const experts = [
-    {
-      img: doctor1,
-      name: "2Patrik Cortez",
-      designation: "Doctor",
+  const {
+    data: experts = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["experts"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:3000/experts");
+      const data = await res.json();
+      return data;
     },
-    {
-      img: doctor4,
-      name: "2Patrik Cortezi",
-      designation: "Doctor",
-    },
-    {
-      img: doctor2,
-      name: "2Patrik Corteza",
-      designation: "Doctor",
-    },
-    {
-      img: doctor3,
-      name: "2Patrik Corte",
-      designation: "Doctor",
-    },
-  ];
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  // const experts = [
+  //   {
+  //     img: doctor1,
+  //     name: "2Patrik Cortez",
+  //     designation: "Doctor",
+  //   },
+  //   {
+  //     img: doctor4,
+  //     name: "2Patrik Cortezi",
+  //     designation: "Doctor",
+  //   },
+  //   {
+  //     img: doctor2,
+  //     name: "2Patrik Corteza",
+  //     designation: "Doctor",
+  //   },
+  //   {
+  //     img: doctor3,
+  //     name: "2Patrik Corte",
+  //     designation: "Doctor",
+  //   },
+  // ];
 
   return (
     <div className=" px-4 md:px-29">
@@ -43,7 +62,7 @@ const ExpertTeam = () => {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {experts.map((expert) => (
-          <Expert expert={expert} key={expert.name}></Expert>
+          <Expert expert={expert} key={expert._id}></Expert>
         ))}
       </div>
     </div>

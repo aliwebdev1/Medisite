@@ -12,7 +12,10 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import DashboardLayout from "../layout/DashboardLayout/DashboardLayout";
 import MyAppointment from "../Pages/Dashboard/MyAppointment/MyAppointment";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
-import AddDoctors from "../Pages/Dashboard/AddDoctors/AddDoctors";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import OurExpert from "../Pages/Dashboard/OutExpert/OurExpert";
+import ManageExperts from "../Pages/Dashboard/ManageExperts/ManageExperts";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,27 +60,46 @@ const router = createBrowserRouter([
     ],
   },
   {
-     path: "/dashboard",
-     element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-     children:[
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
       {
-        path:'/dashboard',
-        element:<MyAppointment></MyAppointment>
+        path: "/dashboard",
+        element: <MyAppointment></MyAppointment>,
       },
       {
-        path:'/dashboard/my-appointment',
-        element:<MyAppointment></MyAppointment>
+        path: "/dashboard/my-appointment",
+        element: <MyAppointment></MyAppointment>,
       },
       {
-        path:'/dashboard/all-users',
-        element:<AllUsers></AllUsers>
+        path: "/dashboard/all-users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
-        path:'/dashboard/add-doctors',
-        element:<AddDoctors></AddDoctors>
-      }
-     ]
-     
+        path: "/dashboard/add-expert",
+        element: (
+          <AdminRoute>
+            <OurExpert></OurExpert>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manage-experts",
+        element: (
+          <AdminRoute>
+            <ManageExperts></ManageExperts>
+          </AdminRoute>
+        ),
+      },
+    ],
   },
   {
     path: "*",
